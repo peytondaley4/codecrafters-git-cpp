@@ -2,14 +2,11 @@
 #include <filesystem>
 #include <fstream>
 #include <string>
+#include <iterator>
+#include <zlib.h>
 
 int main(int argc, char *argv[])
 {
-    // You can use print statements as follows for debugging, they'll be visible when running tests.
-    //std::cout << "Logs from your program will appear here!\n";
-
-    // Uncomment this block to pass the first stage
-    //
     if (argc < 2) {
         std::cerr << "No command provided.\n";
         return EXIT_FAILURE;
@@ -37,6 +34,13 @@ int main(int argc, char *argv[])
             std::cerr << e.what() << '\n';
             return EXIT_FAILURE;
         }
+    } else if (command == "cat-file") {
+        if (argc < 3) {
+            std::cerr << "Unknown command " << command << '\n';
+            return EXIT_FAILURE;
+        }
+
+        std::string objectHash = argv[3];
     } else {
         std::cerr << "Unknown command " << command << '\n';
         return EXIT_FAILURE;
