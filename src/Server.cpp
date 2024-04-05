@@ -84,9 +84,9 @@ void hashObj(std::string file) {
 
     std::string buffer;
     buffer = sha_file(content);
-    uLong bound = compressBound(data.str().size());
+    uLong bound = compressBound(content.size());
     unsigned char compressedData[bound];
-    compressFile(data.str(), &bound, compressedData);
+    compressFile(content, &bound, compressedData);
     
     std::string dir = ".git/objects/" + buffer.substr(0,2);
     std::filesystem::create_directory(dir);
